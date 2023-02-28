@@ -1,10 +1,11 @@
-# AngularTypescriptStarter
+# TVRECOMMENDAPP
 
-> This serves as a boilerplate starter angular project. This source code is inspired by best practices across the angular comunity and daily challenges that inforces to follow a pattern on creating newer Angular projects.
+> small app consumes list movies api and filter them using angular and custom frontend styling.
 
 - **[Angular](https://angular.io/api/core)** (15.x)
 - **[Angular CLI](https://github.com/angular/angular-cli)** (15.x)
 - **[Typescript](https://www.typescriptlang.org/)** (4.x)
+- **[PrimeFlex](https://www.primefaces.org/primeflex)** (3.x)
 - **[TSlint](https://eslint.org/docs/latest/)** (6.x)
 
 ---
@@ -28,4 +29,4 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Contribution
 
 - The project can be forked to add feature and open a pull requests.
-- It is possible to [Open](https://github.com/reemsb/angular-typescript-starter/issues/) an issue for bugs or feature request.
+- It is possible to [Open](https://github.com/reemsb/tv-recommend-app/issues/) an issue for bugs or feature request.

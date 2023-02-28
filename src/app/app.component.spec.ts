@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'angular-typescript-starter'`, () => {
+  it(`should have as title 'tv-recommend-app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    expect(app.title).toEqual('angular-typescript-starter');
+    expect(app.title).toEqual('tv-recommend-app');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('angular-typescript-starter app is running!');
+    expect(compiled.querySelector('.content span')?.textContent).toContain('tv-recommend-app app is running!');
   });
 });
