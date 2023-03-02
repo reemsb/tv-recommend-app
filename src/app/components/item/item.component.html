@@ -1,0 +1,13 @@
+<ng-container *ngIf="tvItem">
+  <a class="item">
+    <div class="item-rating">
+      <i class="app-mat-icon">star</i>
+      <span>{{ tvItem.vote_average }}</span
+      >/10
+    </div>
+    <div class="item-image">
+      <img [src]="'https://image.tmdb.org/t/p/original/' + tvItem.backdrop_path" alt="movie-pic" />
+    </div>
+    <div class="item-title">{{ tvItem.title }}</div>
+  </a>
+</ng-container>

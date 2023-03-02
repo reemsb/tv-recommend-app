@@ -1,6 +1,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, Input, OnInit } from '@angular/core';
-import { Movie } from 'src/app/models/movie';
+import { Movie } from '../../models/movie';
 
 @Component({
   selector: 'slider',
@@ -21,12 +21,12 @@ import { Movie } from 'src/app/models/movie';
   ]
 })
 export class SliderComponent implements OnInit{
-  @Input() items: Movie[]=[];
+  @Input() movieitems: Movie[]=[];
   currentSlideIndex : number = 0;
 
   ngOnInit() {
     setInterval(()=>{
-      this.currentSlideIndex=++this.currentSlideIndex % this.items.length
+      this.currentSlideIndex=++this.currentSlideIndex % this.movieitems.length
     },5000)
   }
 }

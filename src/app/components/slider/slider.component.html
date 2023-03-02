@@ -1,6 +1,6 @@
 <div class="slider">
-  <ng-container *ngFor="let item of items; let i = index">
-    <div class="slide" *ngIf="i === currentSlideIndex">
+  <ng-container *ngFor="let item of movieitems; let i = index">
+    <div class="slide" *ngIf="i === currentSlideIndex" @slideFade>
       <div class="slide-bg">
         <img
           class="slide-bg-image"
@@ -17,7 +17,7 @@
               <span>/10</span>
             </span>
             <span>{{ item.vote_count }} Reviews</span>
-            <span>{{ item.release_date | date : 'yyyy' }}</span>
+            <span>{{ item.release_date }}</span>
           </div>
           <div class="desc mt-5">
             {{ item.overview }}
