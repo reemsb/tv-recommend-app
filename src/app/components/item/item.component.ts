@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Movie } from '../../models/movie';
+import { TvShow } from 'src/app/models/tvshow';
 
 @Component({
   selector: 'item',
@@ -7,5 +8,5 @@ import { Movie } from '../../models/movie';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent {
-    @Input() tvItem:Movie| null=null
+    @Input() tvItem:Movie&TvShow|null=null
 }

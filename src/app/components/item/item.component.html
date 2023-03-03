@@ -6,8 +6,11 @@
       >/10
     </div>
     <div class="item-image">
-      <img [src]="'https://image.tmdb.org/t/p/original/' + tvItem.backdrop_path" alt="movie-pic" />
+      <img
+        [src]="'https://image.tmdb.org/t/p/w342/' + tvItem.poster_path"
+        [alt]="tvItem.name ? tvItem.name : tvItem.title"
+      />
     </div>
-    <div class="item-title">{{ tvItem.title }}</div>
+    <div class="item-title">{{ tvItem.name ? tvItem.name : tvItem.title }}</div>
   </a>
 </ng-container>
