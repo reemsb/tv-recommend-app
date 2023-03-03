@@ -14,6 +14,7 @@ export interface TvShow {
   vote_count: number
 }
 
+//the backend response data model
 export interface TvShowDto{
   page: number,
   results: TvShow[]

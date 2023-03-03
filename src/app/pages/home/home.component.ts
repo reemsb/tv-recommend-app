@@ -23,28 +23,28 @@ export class HomeComponent implements OnInit {
     Object.values(VarietyType).forEach(type => {
       switch (type) {
         case 'popular':
-          this.moviesService.getMovies(type).subscribe((response: any) => {
-            this.popularMovies = response.results.slice(0,6);
+          this.moviesService.getMovies(type).subscribe((response:Movie[]) => {
+            this.popularMovies = response;
           });
           break;
 
           case 'top_rated':
-            this.moviesService.getMovies(type).subscribe((response: any) => {
-              this.topMovies = response.results.slice(0,6);
+            this.moviesService.getMovies(type).subscribe((response: Movie[]) => {
+              this.topMovies = response;
             });
           break;
           
         default:'upcoming'
-        this.moviesService.getMovies(type).subscribe((response: any) => {
-          this.upcomingMovies = response.results.slice(0,6);
+        this.moviesService.getMovies(type).subscribe((response: Movie[]) => {
+          this.upcomingMovies = response;
         });
           break;
       }
     });
 
     //retrieve popular tv shows
-    this.showsService.getTvShows('popular').subscribe((response:any)=>{
-        this.popularShows=response.results.slice(0,6);
+    this.showsService.getTvShows('popular').subscribe((response:TvShow[])=>{
+        this.popularShows=response;
     })
   }
 }
