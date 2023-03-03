@@ -19,4 +19,10 @@ baseUrl:string='https://api.themoviedb.org/3'
       return of (res.results.slice(0,count))
     }));
   }
+  searchTvShows(page:number=1) {
+    return this.http.get<TvShowDto>(`${this.baseUrl}/tv/popular?page=${page}&api_key=${this.api_key}`)
+    .pipe(switchMap(res => {
+      return of (res.results)
+    }));
+  }
 }

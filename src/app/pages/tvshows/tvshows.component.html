@@ -1,1 +1,12 @@
-<p>tvshows works!</p>
+<div class="container">
+  <ng-container *ngIf="tvShows">
+    <div class="grid">
+      <div class="col-6 md:col-3 lg:col-3" *ngFor="let show of tvShows">
+        <item [tvItem]="show"></item>
+      </div>
+    </div>
+    <div>
+      <p-paginator [rows]="20" [totalRecords]="10000" (onPageChange)="paginate($event)"></p-paginator>
+    </div>
+  </ng-container>
+</div>

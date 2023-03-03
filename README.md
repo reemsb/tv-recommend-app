@@ -6,6 +6,7 @@
 - **[Angular CLI](https://github.com/angular/angular-cli)** (15.x)
 - **[Typescript](https://www.typescriptlang.org/)** (4.x)
 - **[PrimeFlex](https://www.primefaces.org/primeflex)** (3.x)
+- **[PrimeNG](https://www.primefaces.org/primeng-v11-lts/#/setup)** (11.x)
 - **[TSlint](https://eslint.org/docs/latest/)** (6.x)
 
 ---

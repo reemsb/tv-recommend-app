@@ -14,6 +14,7 @@ import { ItemsBannerComponent } from './components/items-banner/items-banner.com
 import { ItemComponent } from './components/item/item.component';
 import { TvshowsComponent } from './pages/tvshows/tvshows.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
+import {PaginatorModule} from 'primeng/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,14 +25,14 @@ import { CategoriesComponent } from './pages/categories/categories.component';
     SliderComponent,
     ItemsBannerComponent,
     ItemComponent,
-    // TvshowsComponent,
+    TvshowsComponent,
     CategoriesComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule,PaginatorModule
     
   ],
   providers: [],

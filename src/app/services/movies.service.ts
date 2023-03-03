@@ -21,8 +21,8 @@ export class MoviesService {
   }
 
 
-  searchMovies():Observable<Movie[]> {
-    return  this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}`)
+  searchMovies(page: number=1):Observable<Movie[]> {
+    return  this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?page=${page}&api_key=${this.apiKey}`)
     .pipe(switchMap(res => {
        return of (res.results)
     }));

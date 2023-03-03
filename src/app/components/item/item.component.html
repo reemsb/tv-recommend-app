@@ -2,7 +2,7 @@
   <a class="item">
     <div class="item-rating">
       <i class="app-mat-icon">star</i>
-      <span>{{ tvItem.vote_average }}</span
+      <span>{{ tvItem.vote_average !== 0 ? tvItem.vote_average : '*' }}</span
       >/10
     </div>
     <div class="item-image">
