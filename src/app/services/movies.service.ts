@@ -19,4 +19,12 @@ export class MoviesService {
       return of (res.results.slice(0,count))
    }));
   }
+
+
+  searchMovies():Observable<Movie[]> {
+    return  this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?api_key=${this.apiKey}`)
+    .pipe(switchMap(res => {
+       return of (res.results)
+    }));
+   }
 }

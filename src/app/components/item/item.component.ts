@@ -8,5 +8,7 @@ import { TvShow } from 'src/app/models/tvshow';
   styleUrls: ['./item.component.scss']
 })
 export class ItemComponent {
-    @Input() tvItem:Movie&TvShow|null=null
+    @Input() tvItem?:Movie & TvShow
+
+  
 }

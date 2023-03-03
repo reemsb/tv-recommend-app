@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { MoviesComponent } from './pages/movies/movies.component';
+import { TvshowsComponent } from './pages/tvshows/tvshows.component';
+import { CategoriesComponent } from './pages/categories/categories.component';
 
 const routes: Routes = [
   {
@@ -14,11 +16,11 @@ const routes: Routes = [
   },
   {
     path: 'tvshows',
-    component: MoviesComponent
+    component: TvshowsComponent
   },
   {
     path: 'categories',
-    component: MoviesComponent
+    component: CategoriesComponent
   },
   {
     path: '**',
