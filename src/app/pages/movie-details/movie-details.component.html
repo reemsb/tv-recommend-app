@@ -1,1 +1,59 @@
-<p>movie-details works!</p>
+<ng-container *ngIf="movie">
+  <slider [movieitems]="[movie]" [isBanner]="true"></slider>
+  <!-- Movie tabs -->
+  <div>
+    <p-tabView>
+      <p-tabPanel header="Overview">
+        <div class="grid">
+          <div class="col-fixed">
+            <img class="poster" [src]="'https://image.tmdb.org/t/p/w342/' + movie.poster_path" [alt]="movie.title" />
+          </div>
+          <div class="col">
+            <h2>Overview</h2>
+            <p class="overview">{{ movie.overview }}</p>
+            <div class="stat">
+              <div class="label">Release Date:</div>
+              <div class="value">
+                {{ movie.release_date | date : 'dd.MM.YYYY' }}
+              </div>
+            </div>
+
+            <div class="stat">
+              <div class="label">Language:</div>
+              <div class="value">
+                {{ movie.original_language | uppercase }}
+              </div>
+            </div>
+            <div class="stat">
+              <div class="label">Revenue:</div>
+              <div class="value">
+                {{ movie.revenue | currency }}
+              </div>
+            </div>
+            <div class="stat">
+              <div class="label">Duration:</div>
+              <div class="value">{{ movie.runtime }} minutes</div>
+            </div>
+            <div class="stat">
+              <div class="label">Status:</div>
+              <div class="value">{{ movie.status }}</div>
+            </div>
+            <div class="stat">
+              <div class="label">Genres:</div>
+              <div class="value" *ngFor="let genre of movie.genres">
+                <p-chip>{{ genre.name }}</p-chip>
+              </div>
+            </div>
+          </div>
+        </div>
+      </p-tabPanel>
+      <p-tabPanel header="Media"> content 2</p-tabPanel>
+      <p-tabPanel header="Reviews"> content 3 </p-tabPanel>
+    </p-tabView>
+  </div>
+  <!-- other recommedations -->
+  <div>
+    <items-banner [mainTitle]="'Recommended Movies'" [tvItems]="similarMovies"></items-banner>
+    <p-paginator [rows]="1" [totalRecords]="2" (onPageChange)="paginate($event)"></p-paginator>
+  </div>
+</ng-container>

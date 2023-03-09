@@ -2,7 +2,7 @@ export interface TvShow {
   backdrop_path: string;
   first_air_date: string;
   genre_ids: number[];
-  id: number;
+  id: string;
   name: string;
   origin_country: string[];
   original_language: string;

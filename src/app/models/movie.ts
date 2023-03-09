@@ -1,8 +1,10 @@
+import { Genre } from "./genre";
+
 export interface Movie {
   adult: boolean;
   backdrop_path: string;
   genre_ids: number[];
-  id: number;
+  id: string;
   original_language: string;
   original_title: string;
   overview: string;
@@ -13,6 +15,10 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  revenue:number;
+  runtime:number;
+  status:string;
+  genres:Genre[]
 }
 
 //the backend response data model
@@ -22,3 +28,4 @@ export interface MovieDto {
   total_pages: number,
   total_results: number
 }
+

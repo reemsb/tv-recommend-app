@@ -14,7 +14,9 @@ import { ItemsBannerComponent } from './components/items-banner/items-banner.com
 import { ItemComponent } from './components/item/item.component';
 import { TvshowsComponent } from './pages/tvshows/tvshows.component';
 import { CategoriesComponent } from './pages/categories/categories.component';
-import {PaginatorModule} from 'primeng/paginator';
+import { PaginatorModule } from 'primeng/paginator';
+import { ChipModule } from 'primeng/chip';
+import { TabViewModule } from 'primeng/tabview';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
 @NgModule({
   declarations: [
@@ -34,8 +36,10 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    HttpClientModule,PaginatorModule
-    
+    HttpClientModule,
+    PaginatorModule,
+    TabViewModule,
+    ChipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

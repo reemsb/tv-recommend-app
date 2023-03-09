@@ -27,4 +27,15 @@ export class MoviesService {
        return of (res.results)
     }));
    }
+
+   getMovieDetails(id:string):Observable<Movie> {
+      return this.http.get<Movie>(`${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`);
+   }
+
+   getSimilarMovies(id:string, page:number):Observable<Movie[]>{
+      return this.http.get<MovieDto>(`${this.baseUrl}/movie/${id}/recommendations?page=${page}&api_key=${this.apiKey}`)
+      .pipe(switchMap(res => {
+         return of (res.results)
+      }));;
+   }
 }

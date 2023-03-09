@@ -1,0 +1,60 @@
+@import '../../../styles/colors-variables';
+
+:host ::ng-deep {
+  .p-tabview-nav {
+    justify-content: space-between;
+
+    .p-tabview-ink-bar {
+      background-color: $bgColorLight;
+    }
+
+    li {
+      .p-tabview-nav-link {
+        color: $white;
+      }
+
+      &.p-highlight .p-tabview-nav-link {
+        color: $primaryColor;
+        background-color: $bgColorLight;
+      }
+    }
+  }
+
+  .p-chip {
+    background-color: $primaryColor;
+    color: black;
+    font-size: large;
+    font-weight: bold;
+    margin-right: 5px;
+  }
+}
+
+.poster {
+  max-width: 1.2;
+}
+.overview {
+  line-height: 1.5;
+  font-size: medium;
+  margin-left: 10px;
+}
+.stat {
+  display: flex;
+  margin-left: 10px;
+  margin-bottom: 15px;
+
+  .label {
+    width: 150px;
+    color: $secondaryColor;
+    font-weight: bold;
+    font-size: large;
+  }
+  .value {
+    color: $white;
+    font-weight: 600;
+  }
+}
+
+h2 {
+  color: $primaryColor;
+  font-size: x-large;
+}
