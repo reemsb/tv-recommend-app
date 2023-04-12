@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Movie, MovieDto } from '../models/movie';
 import { switchMap } from 'rxjs/operators';
+import { Video, VideoDto } from '../models/video';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class MoviesService {
    return  this.http.get<MovieDto>(`${this.baseUrl}/movie/${type}?api_key=${this.apiKey}`)
    .pipe(switchMap(res => {
       return of (res.results.slice(0,count))
-   }));
+   }))
   }
 
 
@@ -25,17 +26,24 @@ export class MoviesService {
     return  this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?page=${page}&api_key=${this.apiKey}`)
     .pipe(switchMap(res => {
        return of (res.results)
-    }));
+    }))
    }
 
    getMovieDetails(id:string):Observable<Movie> {
-      return this.http.get<Movie>(`${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`);
+      return this.http.get<Movie>(`${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`)
    }
 
-   getSimilarMovies(id:string, page:number):Observable<Movie[]>{
+   getSimilarMovies(id:string, page:number):Observable<Movie[]> {
       return this.http.get<MovieDto>(`${this.baseUrl}/movie/${id}/recommendations?page=${page}&api_key=${this.apiKey}`)
       .pipe(switchMap(res => {
          return of (res.results)
-      }));;
+      }))
+   }
+
+   getMovieVideos(id:string):Observable<Video[]> {
+      return this.http.get<VideoDto>(`${this.baseUrl}/movie/${id}/videos?api_key=${this.apiKey}`).pipe(
+         switchMap(res=>{
+         return of( res.results)
+         }))
    }
 }

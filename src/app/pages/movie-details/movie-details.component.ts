@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../../models/movie';
 import { MoviesService } from '../../services/movies.service';
-import { Genre } from '../..//models/genre';
+import { Video } from '../../models/video';
 
 @Component({
   selector: 'app-movie-details',
@@ -12,7 +12,7 @@ import { Genre } from '../..//models/genre';
 export class MovieDetailsComponent implements OnInit{
   movie?:Movie
   similarMovies:any[]=[]
-  genres:Genre[]=[]
+  videos:Video[]=[]
   
   constructor(private movieService:MoviesService, private route:ActivatedRoute){ }
 
@@ -23,8 +23,10 @@ export class MovieDetailsComponent implements OnInit{
 
       //get recommendations/similar movies
       this.getPagedSimilarMovies(id,1)
-    })
 
+      //get movie videos:
+      this.movieService.getMovieVideos(id).subscribe(videos=>this.videos=videos);
+    })
   }
   getPagedSimilarMovies(id:string,page:number){
     this.movieService.getSimilarMovies(id,page).subscribe(movies=>{
@@ -36,4 +38,5 @@ export class MovieDetailsComponent implements OnInit{
       this.getPagedSimilarMovies(this.movie.id, event.page + 1);
     }
   }
+
 }

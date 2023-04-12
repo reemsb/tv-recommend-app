@@ -18,6 +18,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { ChipModule } from 'primeng/chip';
 import { TabViewModule } from 'primeng/tabview';
 import { MovieDetailsComponent } from './pages/movie-details/movie-details.component';
+import { VideoPlayerComponent } from './components/video-player/video-player.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { MovieDetailsComponent } from './pages/movie-details/movie-details.compo
     ItemComponent,
     TvshowsComponent,
     CategoriesComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    VideoPlayerComponent
   ],
   imports: [
     BrowserModule,
