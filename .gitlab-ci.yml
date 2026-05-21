@@ -1,13 +1,28 @@
-# You can override the included template(s) by including variable overrides
-# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
-# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
-# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
-# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
-# Note that environment variables can be set in several places
-# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
+default:
+  image: node:20-alpine
+
 stages:
-- test
-sast:
-  stage: test
-include:
-- template: Security/SAST.gitlab-ci.yml
+  - verify
+
+cache:
+  key:
+    files:
+      - package-lock.json
+  paths:
+    - node_modules/
+
+verify:
+  stage: verify
+  script:
+    - npm ci --prefer-offline --no-audit --fund=false
+    # CI needs an environment.ts file. The example acts as a stand-in so the
+    # build can compile without a real TMDB key (API calls will 401 at runtime,
+    # but the bundle still builds).
+    - cp src/environments/environment.example.ts src/environments/environment.ts
+    - npm run lint
+    - npm run build
+  artifacts:
+    name: "tv-recommend-build-$CI_COMMIT_SHORT_SHA"
+    paths:
+      - dist/
+    expire_in: 1 week

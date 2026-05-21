@@ -1,49 +1,53 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
+import { Injectable, inject } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 import { Movie, MovieDto } from '../models/movie';
-import { switchMap } from 'rxjs/operators';
 import { Video, VideoDto } from '../models/video';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class MoviesService {
-  baseUrl:string ='https://api.themoviedb.org/3'
-  apiKey:string ='1f9e4794619064689b9df78dd9e0f6b9'
+  private readonly http = inject(HttpClient);
+  private readonly baseUrl = environment.tmdb.apiBaseUrl;
 
-  constructor(private http: HttpClient) { }
-
-  getMovies(type:string ='upcoming', count:number=6):Observable<Movie[]> {
-   return  this.http.get<MovieDto>(`${this.baseUrl}/movie/${type}?api_key=${this.apiKey}`)
-   .pipe(switchMap(res => {
-      return of (res.results.slice(0,count))
-   }))
+  private params(extra: Record<string, string | number> = {}): HttpParams {
+    let p = new HttpParams().set('api_key', environment.tmdb.apiKey);
+    for (const [k, v] of Object.entries(extra)) {
+      p = p.set(k, String(v));
+    }
+    return p;
   }
 
+  getMovies(type: 'popular' | 'upcoming' | 'top_rated' = 'upcoming', count = 6): Observable<Movie[]> {
+    return this.http
+      .get<MovieDto>(`${this.baseUrl}/movie/${type}`, { params: this.params() })
+      .pipe(map((res) => res.results.slice(0, count)));
+  }
 
-  searchMovies(page: number=1):Observable<Movie[]> {
-    return  this.http.get<MovieDto>(`${this.baseUrl}/movie/popular?page=${page}&api_key=${this.apiKey}`)
-    .pipe(switchMap(res => {
-       return of (res.results)
-    }))
-   }
+  searchMovies(page = 1): Observable<Movie[]> {
+    return this.http
+      .get<MovieDto>(`${this.baseUrl}/movie/popular`, { params: this.params({ page }) })
+      .pipe(map((res) => res.results));
+  }
 
-   getMovieDetails(id:string):Observable<Movie> {
-      return this.http.get<Movie>(`${this.baseUrl}/movie/${id}?api_key=${this.apiKey}`)
-   }
+  getMovieDetails(id: string): Observable<Movie> {
+    return this.http.get<Movie>(`${this.baseUrl}/movie/${id}`, {
+      params: this.params(),
+    });
+  }
 
-   getSimilarMovies(id:string, page:number):Observable<Movie[]> {
-      return this.http.get<MovieDto>(`${this.baseUrl}/movie/${id}/recommendations?page=${page}&api_key=${this.apiKey}`)
-      .pipe(switchMap(res => {
-         return of (res.results)
-      }))
-   }
+  getSimilarMovies(id: string, page: number): Observable<Movie[]> {
+    return this.http
+      .get<MovieDto>(`${this.baseUrl}/movie/${id}/recommendations`, {
+        params: this.params({ page }),
+      })
+      .pipe(map((res) => res.results));
+  }
 
-   getMovieVideos(id:string):Observable<Video[]> {
-      return this.http.get<VideoDto>(`${this.baseUrl}/movie/${id}/videos?api_key=${this.apiKey}`).pipe(
-         switchMap(res=>{
-         return of( res.results)
-         }))
-   }
+  getMovieVideos(id: string): Observable<Video[]> {
+    return this.http
+      .get<VideoDto>(`${this.baseUrl}/movie/${id}/videos`, { params: this.params() })
+      .pipe(map((res) => res.results));
+  }
 }

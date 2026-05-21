@@ -1,4 +1,4 @@
-@import '../../../styles/colors-variables';
+@use '../../../styles/colors-variables' as *;
 
 .slider {
   display: flex;

@@ -1,5 +1,4 @@
-@import '../../../styles/colors-variables';
-@import '../../../styles/colors-variables';
+@use '../../../styles/colors-variables' as *;
 
 footer {
   display: flex;

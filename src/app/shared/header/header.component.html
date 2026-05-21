@@ -1,13 +1,15 @@
 <header>
   <nav class="navbar">
-    <a href="" class="navbar-logo">
+    <a routerLink="/" class="navbar-logo">
       <img src="assets/images/tv-logo.jpg" alt="app-logo" />
     </a>
     <ul class="navbar-links">
-      <li><a routerLink="/">Home</a></li>
-      <li><a routerLink="/movies">Movies</a></li>
-      <li><a routerLink="/tvshows">TV Shows</a></li>
-      <li><a routerLink="/categories">Categories</a></li>
+      <li>
+        <a routerLink="/" routerLinkActive="is-active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+      </li>
+      <li><a routerLink="/movies" routerLinkActive="is-active">Movies</a></li>
+      <li><a routerLink="/tvshows" routerLinkActive="is-active">TV Shows</a></li>
+      <li><a routerLink="/categories" routerLinkActive="is-active">Categories</a></li>
     </ul>
   </nav>
 </header>

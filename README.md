@@ -1,44 +1,82 @@
-# TVRECOMMENDAPP
+# TV Recommend
 
-> small app consumes list movies api and filter them using angular and custom frontend styling.
+[![pipeline status](https://gitlab.com/rimssboui/tv-recommend-app/badges/main/pipeline.svg)](https://gitlab.com/rimssboui/tv-recommend-app/-/commits/main)
 
+A small Angular app for browsing trending movies and TV shows, powered by the [TMDB](https://www.themoviedb.org/) API. Built as a portfolio piece showcasing modern Angular (standalone components, the new control-flow syntax, lazy-loaded routes) and PrimeNG's design tokens for the dark theme.
 
----
-## technologies
-- **[Angular](https://angular.io/api/core)** (15.x)
-- **[Angular CLI](https://github.com/angular/angular-cli)** (15.x)
-- **[Typescript](https://www.typescriptlang.org/)** (4.x)
-- **[PrimeFlex](https://www.primefaces.org/primeflex)** (3.x)
-- **[PrimeNG](https://www.primefaces.org/primeng-v11-lts/#/setup)** (11.x)
-- **[TSlint](https://eslint.org/docs/latest/)** (6.x)
-<img width="1800" height="1004" alt="Screenshot 2025-09-20 at 12 19 49" src="https://github.com/user-attachments/assets/bcd4f083-7c15-4b33-9b30-068184874413" />
-<img width="1800" height="1004" alt="Screenshot 2025-09-20 at 12 20 00" src="https://github.com/user-attachments/assets/9be2d071-500c-4a38-a889-ae046ae620f2" />
-<img width="1800" height="1004" alt="Screenshot 2025-09-20 at 12 20 10" src="https://github.com/user-attachments/assets/62aaf886-6359-4fe8-833e-bde04f8d8872" />
-<img width="1800" height="1004" alt="Screenshot 2025-09-20 at 12 20 15" src="https://github.com/user-attachments/assets/d4502ab9-685d-4265-8af6-562e93d4d320" />
-<img width="1800" height="1004" alt="Screenshot 2025-09-20 at 12 20 20" src="https://github.com/user-attachments/assets/a2fce122-5676-4f03-b08b-243658c4e335" />
-<img width="1800" height="1004" alt="Screenshot 2025-09-20 at 12 20 47" src="https://github.com/user-attachments/assets/9cf13c81-e04d-41c5-a55b-46b5cb5f70fd" />
+<img width="1800" alt="Home view" src="https://github.com/user-attachments/assets/bcd4f083-7c15-4b33-9b30-068184874413" />
 
+## Stack
 
+| Layer | Tech |
+| --- | --- |
+| Framework | Angular 19 (standalone components, `@if`/`@for` control flow, lazy routes) |
+| Language | TypeScript 5.6 (strict + `strictTemplates`) |
+| UI | PrimeNG 19 (Aura theme preset), PrimeFlex grid, Material Symbols icons |
+| Tooling | ESLint 9 (flat config) + @angular-eslint, Karma + Jasmine, Angular CLI |
+| Data | [TMDB v3 REST API](https://developer.themoviedb.org/reference/intro/getting-started) |
 
----
+## Getting started
 
-## Development server
+### 1. Prerequisites
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Node.js 20+
+- A free [TMDB v3 API key](https://www.themoviedb.org/settings/api)
 
-## Build
+### 2. Configure your API key
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+```bash
+cp src/environments/environment.example.ts src/environments/environment.ts
+# then open src/environments/environment.ts and paste your key into `apiKey`
+```
 
-## Running unit tests
+`environment.ts` is git-ignored, so your key never leaves your machine.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 3. Run
 
-## Running end-to-end tests
+```bash
+npm install
+npm start            # http://localhost:4200
+```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Scripts
 
-## Contribution
+| Command         | What it does |
+| --------------- | ----------------------------------------- |
+| `npm start`     | Dev server on http://localhost:4200 with HMR |
+| `npm run build` | Production build into `dist/tv-recommend-app/` |
+| `npm run lint`  | ESLint over `src/**/*.{ts,html}` |
+| `npm test`      | Run unit tests in headless Chrome |
 
-- The project can be forked to add feature and open a pull requests.
-- It is possible to [Open](https://github.com/reemsb/tv-recommend-app/issues/) an issue for bugs or feature request.
+## Project layout
+
+```
+src/
+├── app/
+│   ├── app.component.ts        # root shell (header + <router-outlet> + footer)
+│   ├── app.config.ts           # standalone providers: router, http, PrimeNG, animations
+│   ├── app.routes.ts           # lazy-loaded page routes
+│   ├── components/             # reusable presentational pieces (item, slider, items-banner, video-player)
+│   ├── pages/                  # top-level routes (home, movies, tvshows, categories, movie-details)
+│   ├── shared/                 # cross-page bits (header, footer)
+│   ├── services/               # HTTP services (movies, tvshow) — all use the env-driven base URL + API key
+│   └── models/                 # TS interfaces for TMDB DTOs
+├── environments/               # environment.example.ts (template), environment.ts (gitignored)
+├── styles/                     # global SCSS partials (variables, normalize)
+└── styles.scss                 # global entrypoint
+```
+
+## Notes
+
+- **Standalone components everywhere** — no `NgModule`. The router uses `loadComponent` for code-split pages.
+- **Templates use the new control flow** (`@if`, `@for`, `@switch`, `@empty`) — no `*ngIf`/`*ngFor`.
+- **Services use `inject()`** instead of constructor DI.
+- **Theme**: PrimeNG's Aura preset with a dark color scheme (`<html class="app-dark">` in `index.html`).
+
+## License
+
+MIT.
+
+## Author
+
+[Rim Sboui](https://gitlab.com/rimssboui) · [GitHub mirror](https://github.com/reemsb/tv-recommend-app)
