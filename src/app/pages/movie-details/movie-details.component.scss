@@ -1,4 +1,4 @@
-@import '../../../styles/colors-variables';
+@use '../../../styles/colors-variables' as *;
 
 :host ::ng-deep {
   .p-tabview-nav {

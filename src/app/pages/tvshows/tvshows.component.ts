@@ -1,27 +1,33 @@
-import { Component, OnInit } from '@angular/core';
-import { TvshowService } from 'src/app/services/tvshow.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { TvShow } from '../../models/tvshow';
+import { TvshowService } from '../../services/tvshow.service';
+import { ItemComponent } from '../../components/item/item.component';
 
 @Component({
   selector: 'app-tvshows',
+  standalone: true,
+  imports: [PaginatorModule, ItemComponent],
   templateUrl: './tvshows.component.html',
-  styleUrls: ['./tvshows.component.scss']
+  styleUrls: ['./tvshows.component.scss'],
 })
-export class TvshowsComponent implements OnInit{
-  tvShows?:any[]
+export class TvshowsComponent implements OnInit {
+  private readonly showsService = inject(TvshowService);
 
-  constructor(private showsService:TvshowService) {}
-  
+  tvShows: TvShow[] = [];
+
   ngOnInit(): void {
-    this.getPaginatedShows(1)
-    }
-
-  getPaginatedShows(page:number){
-    this.showsService.searchTvShows(page).subscribe(shows=>{
-      this.tvShows=shows
-      })
+    this.loadPage(1);
   }
 
-  paginate(event:any) {
-   this.getPaginatedShows(++event.page);
+  loadPage(page: number): void {
+    this.showsService.searchTvShows(page).subscribe({
+      next: (shows) => (this.tvShows = shows),
+      error: (err) => console.error('Failed to load TV shows', err),
+    });
+  }
+
+  onPageChange(event: PaginatorState): void {
+    this.loadPage((event.page ?? 0) + 1);
   }
 }

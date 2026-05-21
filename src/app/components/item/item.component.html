@@ -1,16 +1,15 @@
-<ng-container *ngIf="tvItem">
-  <a class="item" [routerLink]="['/movie/', tvItem.id]">
+@if (tvItem) {
+  <a class="item" [routerLink]="['/movie', tvItem.id]">
     <div class="item-rating">
       <i class="app-mat-icon">star</i>
-      <span>{{ tvItem.vote_average !== 0 ? tvItem.vote_average : '*' }}</span
-      >/10
+      <span>{{ tvItem.vote_average !== 0 ? tvItem.vote_average : '*' }}</span>/10
     </div>
     <div class="item-image">
       <img
         [src]="'https://image.tmdb.org/t/p/w342/' + tvItem.poster_path"
-        [alt]="tvItem.name ? tvItem.name : tvItem.title"
+        [alt]="tvItem.name || tvItem.title"
       />
     </div>
-    <div class="item-title">{{ tvItem.name ? tvItem.name : tvItem.title }}</div>
+    <div class="item-title">{{ tvItem.name || tvItem.title }}</div>
   </a>
-</ng-container>
+}

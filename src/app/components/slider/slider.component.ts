@@ -1,36 +1,36 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Movie } from '../../models/movie';
 
 @Component({
-  selector: 'slider',
+  selector: 'app-slider',
+  standalone: true,
   templateUrl: './slider.component.html',
   styleUrls: ['./slider.component.scss'],
-  animations:[
-    //define a trigger to fire our animationwhich we will use in our template
-    trigger('slideFade',[
-      //define the end state of this div slide: the hidden state 
-      state('void', style({opacity:0})),
-      //the start state is the * or the current state: will hide in 1s
-      transition('void => *',[animate('1s')]),
-      //from original state to end state: will show in half of a second
-      transition('* => void',[animate('500ms')])
-      // or if it is the same transition in both direction of the state
-      // transition('void <=> *',[animate('1s')]),
-    ])
-  ]
+  animations: [
+    trigger('slideFade', [
+      state('void', style({ opacity: 0 })),
+      transition('void => *', [animate('1s')]),
+      transition('* => void', [animate('500ms')]),
+    ]),
+  ],
 })
-export class SliderComponent implements OnInit{
-  @Input() movieitems: Movie[]=[];
-  @Input() isBanner:boolean=false;
+export class SliderComponent implements OnInit, OnDestroy {
+  @Input() movieitems: Movie[] = [];
+  @Input() isBanner = false;
 
-  currentSlideIndex : number = 0;
+  currentSlideIndex = 0;
+  private intervalId?: ReturnType<typeof setInterval>;
 
-  ngOnInit() {
-    if(!this.isBanner) {
-      setInterval(()=>{
-        this.currentSlideIndex=++this.currentSlideIndex % this.movieitems.length
-      },5000)
+  ngOnInit(): void {
+    if (!this.isBanner && this.movieitems.length > 1) {
+      this.intervalId = setInterval(() => {
+        this.currentSlideIndex = (this.currentSlideIndex + 1) % this.movieitems.length;
+      }, 5000);
     }
+  }
+
+  ngOnDestroy(): void {
+    if (this.intervalId) clearInterval(this.intervalId);
   }
 }
